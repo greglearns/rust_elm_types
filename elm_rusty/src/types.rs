@@ -17,7 +17,7 @@ pub enum ElmTypes {
 impl ElmTypes {
     pub fn elm_type(&self) -> String {
         (match self {
-            ElmTypes::Bool => "bool",
+            ElmTypes::Bool => "Bool",
             ElmTypes::String => "String",
             ElmTypes::Int => "Int",
             ElmTypes::Float => "Float",

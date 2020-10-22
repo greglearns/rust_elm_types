@@ -8,7 +8,7 @@ extern crate proc_macro;
 use crate::types::ElmTypes;
 use darling::{FromDeriveInput, FromMeta};
 use proc_macro::TokenStream;
-use std::collections::HashMap;
+use std::collections::BTreeMap;
 use syn::DeriveInput;
 mod elm_files;
 mod types;
@@ -63,7 +63,7 @@ pub fn generate_elm_types(input: TokenStream) -> TokenStream {
         _ => panic!("#[derive(Elm)] can only be used with structs"),
     };
     let field_types = find_field_types(&fields);
-    let mut elm_fields = HashMap::new();
+    let mut elm_fields = BTreeMap::new();
 
     for field in &fields {
         let field_ident = field.ident.as_ref().unwrap().to_string();
@@ -173,8 +173,8 @@ fn find_name_for_field(field: &syn::Field) -> String {
     }
 }
 
-fn find_field_types(fields: &Vec<syn::Field>) -> HashMap<String, Vec<types::RustType>> {
-    let mut types = HashMap::new();
+fn find_field_types(fields: &Vec<syn::Field>) -> BTreeMap<String, Vec<types::RustType>> {
+    let mut types = BTreeMap::new();
     for field in fields {
         let mut type_argument: Vec<types::RustType> = vec![];
         let field_ident = field.ident.as_ref().unwrap().to_string();

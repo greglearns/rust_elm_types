@@ -1,11 +1,11 @@
 use crate::types::ElmTypes;
-use std::collections::HashMap;
+use std::collections::BTreeMap;
 use std::io::Write;
 
 pub fn generate_elm(
     path: &str,
     ident: &str,
-    elm_fields: &mut HashMap<String, Vec<ElmTypes>>,
+    elm_fields: &mut BTreeMap<String, Vec<ElmTypes>>,
 ) -> std::io::Result<()> {
     let mut path: std::path::PathBuf = std::path::Path::new(path).into();
     path.push("elm_types");
@@ -18,6 +18,7 @@ pub fn generate_elm(
     write!(writer, "module {} exposing (..)\n\n", ident)?;
     write!(writer, "type alias {} =\n\t{{ ", ident)?;
     let mut first_elem = true;
+
     for (field, elm_type) in elm_fields.iter_mut() {
         elm_type.reverse();
         let elm_type = generate_elm_type(elm_type);

@@ -9,17 +9,13 @@ mod temp {
 }
 
 #[derive(Elm)]
-#[elm(opts(path = "/Users/abrarkhan/Documents/github/rust_elm_types"))]
 struct Foo {
     id: i32,
     name: String,
 }
 
 #[derive(Elm)]
-#[elm(opts(
-    rename = "ElmUser",
-    path = "/Users/abrarkhan/Documents/github/rust_elm_types"
-))]
+#[elm(opts(rename = "ElmUser",))]
 struct User<'a> {
     #[elm(rename = "foo")]
     name: Option<Vec<i32>>,
